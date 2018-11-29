@@ -1,3 +1,5 @@
+#ifndef UT
+#define UT
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -25,4 +27,7 @@ using namespace std;
 
 void com_line_parser(int argc,char* argv[],ifstream& input_file,ifstream& conf_file,ofstream& output_file,string& metric);
 void read_input(ifstream &input_file,vector<struct Item <double>*> &items,int &m,int &N,int &d);
-void read_conf(ifstream& conf_file, int& k, int & L, int& clusters );
+void read_conf(ifstream& conf_file, int& k, int & L, int& n_clusters );
+int read_prompt(int& in,int& as,int& up);
+
+#endif

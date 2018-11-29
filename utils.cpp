@@ -61,7 +61,7 @@ void read_input(ifstream &input_file,vector<struct Item <double>*> &items,int &m
         
 }
 
-void read_conf(ifstream& conf_file, int& k, int & L, int& clusters ){
+void read_conf(ifstream& conf_file, int& k, int & L, int& n_clusters ){
 	string line,temp_str;	
 
 	while(getline(conf_file,line)){
@@ -73,29 +73,87 @@ void read_conf(ifstream& conf_file, int& k, int & L, int& clusters ){
         if(!temp_str.compare("number_of_clusters:")){
         	
         	getline(curr_line, temp_str, ' ');
-        	clusters = atoi(temp_str.c_str());
-        
+            n_clusters = atoi(temp_str.c_str());
+            
         }
         else if(!temp_str.compare("number_of_hash_functions:")){
 
         	getline(curr_line, temp_str, ' ');
-        	k = atoi(temp_str.c_str());
-
+            if(temp_str.compare("")){
+        	   k = atoi(temp_str.c_str());
+            }
         }
         else if(!temp_str.compare("number_of_hash_tables:")){
 
         	getline(curr_line, temp_str, ' ');
-        	L = atoi(temp_str.c_str());
-
+            if(temp_str.compare("")){
+        	   L = atoi(temp_str.c_str());
+            }
         }        
 	}
 
 	conf_file.close();
 
-	cout << "Number of clusters = " << clusters << endl;
+	cout << "Number of clusters = " << n_clusters << endl;
 	cout << "Number of hash functions = " << k << endl;
 	cout << "Number of Hashtables = " << L << endl;
 	
+}
+
+int read_prompt(int& in,int& as,int& up){
+    char* com = new char[100];
+    cout << "Do you want to define the algorithms you want run?" << endl;
+    cin >> com;
+    if(!strcmp(com,"yes")){
+        
+        cout << "Tell me the algorithm you want to use for Initialisation!" << endl;
+        cin >> com;
+        
+        if(!strcmp(com,"Random selection")){
+            in = 0;
+        }
+        else if(!strcmp(com,"Kmeans")){
+            in = 1;
+        }
+        else{
+            cout << "Undefined algorithm" << endl;
+            return 0;
+        }
+
+        cout << "Tell me the algorithm you want to use for Assignment!" << endl;
+        cin >> com;
+
+        if(!strcmp(com,"Lloyds")){
+            as = 0;
+        }
+        else if(!strcmp(com,"Lsh")){
+            as = 1;
+        }
+        else if(!strcmp(com,"Hypercube")){
+            as = 2;
+        }
+        else{
+            cout << "Undefined algorithm" << endl;
+            return 0;
+        }
+
+        cout << "Tell me the algorithm you want to use for Update!" << endl;
+        cin >> com;
+
+        if(!strcmp(com,"Kmeans")){
+            as = 0;
+        }
+        else if(!strcmp(com,"Pam")){
+            as = 1;
+        }
+        else{
+            cout << "Undefined algorithm" << endl;
+            return 0;
+        }
+
+    }
+    delete[] com;
+    return 1;
 }
 
 // // Add id to the already existed DataSet

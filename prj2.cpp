@@ -1,19 +1,22 @@
 #include "utils.h"
+#include "Cluster.h"
+#include "Initialisation.h"
 
 using namespace std;
 
 int main(int argc,char* argv[]){
 	ifstream input_file, conf_file;
 	ofstream output_file;
-	int i,j,k = 4 ,L = 5, N,d,clusters; // N = number of items(lines) in the file, d = number of coordinates (dimension)
+	int i,j,k = 4 ,L = 5, N,d,n_clusters,in,as,up; // N = number of items(lines) in the file, d = number of coordinates (dimension)
 	char* com;
 	string line,temp_str;
 	int ident;
 	vector<struct Item <double>*> items,range;
 	struct Item <double>* item,* nn = NULL;
 	string metric;
+	vector<Cluster* > clusters;
 
-	//srand (time(NULL));
+	srand (time(NULL));
 
 	//command line parsing
 	com_line_parser(argc,argv,input_file,conf_file,output_file,metric);
@@ -29,9 +32,13 @@ int main(int argc,char* argv[]){
 	read_input(input_file,items,m,N,d);
 
 	//read configuration file
-	read_conf(conf_file,k,L,clusters);
+	read_conf(conf_file,k,L,n_clusters);
+
+	//read from prompt
+	read_prompt(in,as,up);
 
 	//INITIALISIATION
+	random_selection(items,n_clusters,N,clusters);
 
 
 	//destroy items
@@ -43,5 +50,7 @@ int main(int argc,char* argv[]){
 	items.clear();
 
 	output_file.close();
+
+	return 0;
 
 }

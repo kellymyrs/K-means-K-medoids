@@ -25,13 +25,13 @@ template <typename T>
 struct Item{
 	int id;
 	vector <T> coordinates;
-	int cluster;
+	int cluster_id;
 
 
 	Item(int i,vector<T>& c,int cl){
 		id = i;
 		coordinates = c;
-		cluster = cl;
+		cluster_id = cl;
 	}
 	~Item(){
 		coordinates.clear();
