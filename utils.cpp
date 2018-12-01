@@ -35,13 +35,13 @@ void read_input(ifstream &input_file,vector<struct Item <double>*> &items,int &m
         getline(curr_line, temp_str, ',');
         
         d = 1;
-        
         while (getline(curr_line, temp_str, ',')) {
 
-            coordinates.push_back(atoi(temp_str.c_str()));
-            
+            //cout << stod(temp_str.c_str()) << " ";
+            coordinates.push_back(atof(temp_str.c_str())); 
             d++;
         }
+        //cout << endl;
 
         item = new struct Item<double>(ident , coordinates, -1);
         items.push_back(item);
@@ -55,6 +55,10 @@ void read_input(ifstream &input_file,vector<struct Item <double>*> &items,int &m
     
     d--;
     N = i-1;
+
+    // for( i = 0 ; i < N ; i++ ){
+    //     items[i]->Print_Item();
+    // }
     
     cout << "Number of points = " << N << endl;
     cout << "Dimension = " << d << endl;

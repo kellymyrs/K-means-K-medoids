@@ -13,7 +13,7 @@ Cluster::~Cluster(){
 
 void Cluster::Insert(struct Item<double>* it){
 
-	cout << "Inserting an item to the Cluster" << endl;
+	cout << "Inserting an item to the Cluster " << it->cluster_id << endl;
 	cl.push_back(it);
 
 }

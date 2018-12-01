@@ -37,14 +37,15 @@ struct Item{
 		coordinates.clear();
 	}
 	void Distance(vector<T>& c,double& temp_dist){
-		int temp = 0;
+		double temp = 0;
 		//cout << "Item coordinates : ";
 		for (int i = 0; i < coordinates.size() ; i++){
 			temp += (coordinates[i] - c[i])*(coordinates[i] - c[i]) ;
 		//	cout << coordinates[i] << " " ;
 		}
+		//cout << "Dist : " << temp_dist<< endl;
 		temp_dist = sqrt(temp);
-		//cout << " ********************************sqrt--->" << temp_dist << "\n";
+		//cout << " ************************sqrt--->" << temp_dist;
 		//cout << endl;
 	}
 
@@ -59,6 +60,18 @@ struct Item{
     	cos = dot / (sqrt(denom_a) * sqrt(denom_b)) ;
 
 		temp_dist = 1 - cos;
+	}
+
+	void Print_Item(){
+        cout << "***Start print a POINT***" << '\n';
+
+        // Print cordinates
+        cout << "{";
+        for (auto &c : coordinates) {
+            cout << c <<",";
+        }
+        std::cout << "}" << "\n";
+        std::cout << "<---End print   | POINT |" << "\n\n";		
 	}
 
 };
