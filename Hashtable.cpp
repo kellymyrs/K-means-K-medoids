@@ -5,7 +5,7 @@ Hashtable::Hashtable(int& k,int& d){
 	g_h = new G(k,d);
 }
 
-Hash_Member::Hash_Member(G* g_f,Item<int>* it){
+Hash_Member::Hash_Member(G* g_f,Item<double>* it){
 	//cout << "Creating a hashmember !!!"<< endl;
 	item = it;
 	g_m = g_f;
@@ -33,7 +33,7 @@ Hash_Member::~Hash_Member(){
 }
 
 
-void Hashtable::Insert_Hashtable(struct Item<int>* it,uint32_t& t_size){
+void Hashtable::Insert_Hashtable(struct Item<double>* it,uint32_t& t_size){
 
 	//cout << "Creating f function!" << endl;
 	int64_t f = g_h->f_function(it->coordinates,t_size); //calculate f
@@ -45,13 +45,13 @@ void Hashtable::Insert_Hashtable(struct Item<int>* it,uint32_t& t_size){
 	hashtable[f].push_back(h_member);
 }
 
-struct Item<int>* Hashtable::NN_Hashtable(vector<int>& c,uint32_t& t_size,double& dist){
+struct Item<double>* Hashtable::NN_Hashtable(vector<double>& c,uint32_t& t_size,double& dist){
 	double temp_dist;
 
 	//cout << endl << endl << "Searching Hashtable" << endl;
 	int64_t f = g_h->f_function(c,t_size); //calculate f
 	//cout << "f = " << f << endl;
-	struct Item <int>* temp_item = NULL ,* min_item = NULL;
+	struct Item <double>* temp_item = NULL ,* min_item = NULL;
 
 	//search bucket
 	auto search = hashtable.find(f);
@@ -91,7 +91,7 @@ struct Item<int>* Hashtable::NN_Hashtable(vector<int>& c,uint32_t& t_size,double
 	}
 }
 
-struct Item<int>* Hash_Member::Combine(vector<int>& c,G *g_h,double& temp_dist){
+struct Item<double>* Hash_Member::Combine(vector<double>& c,G *g_h,double& temp_dist){
 	int flag = 1; //checks if the two G functions are equal
 
 	vector<int64_t> g_b,g_t;
@@ -134,8 +134,8 @@ struct Item<int>* Hash_Member::Combine(vector<int>& c,G *g_h,double& temp_dist){
 
 }
 
-void Hashtable::Range_Hashtable(vector<int>& c,uint32_t& t_size,double& R,vector<struct Item <int>*>& range){
-	struct Item <int>* temp_item = NULL;
+void Hashtable::Range_Hashtable(vector<double>& c,uint32_t& t_size,double& R,vector<struct Item <double>*>& range){
+	struct Item <double>* temp_item = NULL;
 	double temp_dist;
 
 	//cout << endl << endl << "Searching Hashtable" << endl;

@@ -21,12 +21,12 @@ Cosine_Hash_Function::~Cosine_Hash_Function(){
 }
 
 //calculates h(p)
-int Cosine_Hash_Function::cosine_h_function(vector <int>& p){
+int Cosine_Hash_Function::cosine_h_function(vector <double>& p){
     double c = 0;
 
     //cout << "Calculating h(p) !" << endl;
 	vector<double>::iterator itv = r.begin();
-	for (vector<int>::iterator it = p.begin(); it != p.end(); it++){
+	for (vector<double>::iterator it = p.begin(); it != p.end(); it++){
 		//cout << "ri = " << *itv << endl;
 		//cout << "p = " << *it << endl;
 		c += (*itv) * (*it);

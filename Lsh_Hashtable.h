@@ -24,9 +24,9 @@ class Lsh_Hashtable {
 	public :
 		Lsh_Hashtable(int& k,int& d,int& L);
 		~Lsh_Hashtable();
-		void Insert_Lsh_Hashtable(struct Item<int>* item,uint32_t& t_size,int& L);
-		struct Item<int>* NN_Lsh(vector<int>& c,int& L,uint32_t& t_size,double& min_dist);
-		void Range_Lsh(vector<int>& c,int& L,uint32_t& t_size,double& R,vector<struct Item <int>*>& range);
+		void Insert_Lsh_Hashtable(struct Item<double>* item,uint32_t& t_size,int& L);
+		struct Item<double>* NN_Lsh(vector<double>& c,int& L,uint32_t& t_size,double& min_dist);
+		void Range_Lsh(vector<double>& c,int& L,uint32_t& t_size,double& R,vector<struct Item <double>*>& range);
 
 };
 

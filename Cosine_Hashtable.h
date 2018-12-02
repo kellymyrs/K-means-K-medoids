@@ -20,13 +20,13 @@ using namespace std;
 
 class Cosine_Hash_Member{
 	private :
-		struct Item<int>* item;
+		struct Item<double>* item;
 	public:
-		struct Item<int> * get_item() { return item; }
+		struct Item<double> * get_item() { return item; }
 
-		Cosine_Hash_Member(Item<int>* it);
+		Cosine_Hash_Member(Item<double>* it);
 		~Cosine_Hash_Member();
-		struct Item<int>* Combine(vector<int>& c,double& temp_dist);
+		struct Item<double>* Combine(vector<double>& c,double& temp_dist);
 };
 
 class Cosine_Hashtable{
@@ -36,9 +36,9 @@ class Cosine_Hashtable{
 	public :
 		Cosine_Hashtable(int& k,int& d);
 		~Cosine_Hashtable();
-		void Insert_Hashtable(struct Item<int>* item,uint32_t& t_size);
-		struct Item<int>* NN_Hashtable(vector<int>& c,uint32_t& t_size,double& dist);
-		void Range_Hashtable(vector<int>& c,uint32_t& t_size,double& R,vector<struct Item <int>*>& range);
+		void Insert_Hashtable(struct Item<double>* item,uint32_t& t_size);
+		struct Item<double>* NN_Hashtable(vector<double>& c,uint32_t& t_size,double& dist);
+		void Range_Hashtable(vector<double>& c,uint32_t& t_size,double& R,vector<struct Item <double>*>& range);
 };
 
 #endif

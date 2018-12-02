@@ -20,7 +20,7 @@ G::~G(){
 	//g.clear();
 }
 
-int64_t G::f_function(vector <int>& p,uint32_t& t_size){
+int64_t G::f_function(vector <double>& p,uint32_t& t_size){
 	//cout << "Calculating f!" << endl;
 
 	int64_t f = 0, h;
@@ -42,7 +42,7 @@ int64_t G::f_function(vector <int>& p,uint32_t& t_size){
 	return f;
 }
 
-void G::Calculate_G(vector<int>& c,vector<int64_t>& g_m){
+void G::Calculate_G(vector<double>& c,vector<int64_t>& g_m){
 	int64_t h;
 
 	vector<Hash_Function*>::iterator it;

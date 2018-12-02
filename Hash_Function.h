@@ -25,7 +25,7 @@ class Hash_Function{
 		Hash_Function(int d);
 		~Hash_Function();
 		void hash_function_v(int d);
-		int64_t g_h_function(vector <int>& p);
+		int64_t g_h_function(vector <double>& p);
 };
 
 #endif

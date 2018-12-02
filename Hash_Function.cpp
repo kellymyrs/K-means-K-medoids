@@ -30,14 +30,14 @@ Hash_Function::~Hash_Function(){
 }
 
 //calculates h(p)
-int64_t Hash_Function::g_h_function(vector <int>& p){
+int64_t Hash_Function::g_h_function(vector <double>& p){
 	int64_t c = 0; //cross product of p and v vectors
 
 	//cout << "Size P :" << p.size()<< endl;
 	//cout << "Size V : "<< v.size()<< endl;
 	//cout << "Calculating h(p) !" << endl;
 	vector<double>::iterator itv = v.begin();
-	for (vector<int>::iterator it = p.begin(); it != p.end(); ++it){
+	for (vector<double>::iterator it = p.begin(); it != p.end(); ++it){
 		//cout << "vi = " << *itv << endl;
 		//cout << "p = " << *it << endl;
 		c += (*itv) * (*it);

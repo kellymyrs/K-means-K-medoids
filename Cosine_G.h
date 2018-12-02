@@ -21,8 +21,8 @@ class Cosine_G{
     public:
         Cosine_G(int& k,int& d);
         ~Cosine_G();
-        uint32_t Calculate_G(vector<int>& c);
-        uint32_t Change_Bit(vector<int>& c,int p);
+        uint32_t Calculate_G(vector<double>& c);
+        uint32_t Change_Bit(vector<double>& c,int p);
 };
 
 #endif

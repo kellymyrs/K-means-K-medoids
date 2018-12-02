@@ -24,14 +24,14 @@ Cosine_Lsh_Hashtable::~Cosine_Lsh_Hashtable(){
 
 }
 
-void Cosine_Lsh_Hashtable::Insert_Lsh_Hashtable(struct Item<int>* item,uint32_t& t_size,int& L){
+void Cosine_Lsh_Hashtable::Insert_Lsh_Hashtable(struct Item<double>* item,uint32_t& t_size,int& L){
 	// for loop for every hashtable
 	for ( int i = 0; i < L; ++i ){
 		lsh_hashtable[i]->Insert_Hashtable(item,t_size);
 	}
 }
 
-void Cosine_Lsh_Hashtable::Range_Lsh(vector<int>& c,int& L,uint32_t& t_size,double& R,vector<struct Item <int>*>& range){
+void Cosine_Lsh_Hashtable::Range_Lsh(vector<double>& c,int& L,uint32_t& t_size,double& R,vector<struct Item <double>*>& range){
 
 	//loop for every hashtable
 	//cout << endl << endl << "Range Search : Searching Cosine_Lsh_Hashtable !" << endl;
@@ -42,11 +42,11 @@ void Cosine_Lsh_Hashtable::Range_Lsh(vector<int>& c,int& L,uint32_t& t_size,doub
 	}
 }
 
-struct Item<int>* Cosine_Lsh_Hashtable::NN_Lsh(vector<int>& c,int& L,uint32_t& t_size,double& min_dist){
+struct Item<double>* Cosine_Lsh_Hashtable::NN_Lsh(vector<double>& c,int& L,uint32_t& t_size,double& min_dist){
 	//loop for every hashtable
 	double dist = min_dist = 10000000;
-	struct Item<int>* min_item; //item with minimum distance for every hashtable
-	struct Item<int>* result;
+	struct Item<double>* min_item; //item with minimum distance for every hashtable
+	struct Item<double>* result;
 
 
 	//cout << endl << endl << " NN : Searching Lsh_Hashtable !" << endl;

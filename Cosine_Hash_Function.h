@@ -21,7 +21,7 @@ class Cosine_Hash_Function{
     public:
         Cosine_Hash_Function(int& d);
         ~Cosine_Hash_Function();
-        int cosine_h_function(vector <int>& p);
+        int cosine_h_function(vector <double>& p);
 };
 
 #endif

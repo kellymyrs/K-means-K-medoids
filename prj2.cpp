@@ -2,6 +2,8 @@
 #include "Cluster.h"
 #include "Initialisation.h"
 #include "Assignment.h"
+#include "Update.h"
+#include "Evaluation.h"
 
 using namespace std;
 
@@ -16,6 +18,7 @@ int main(int argc,char* argv[]){
 	struct Item <double>* item,* nn = NULL;
 	string metric;
 	vector<Cluster* > clusters;
+	vector<Cluster* > old_clusters;
 
 	srand (time(NULL));
 
@@ -24,9 +27,11 @@ int main(int argc,char* argv[]){
     int m;
     if (!metric.compare("euclidean")){
         m = 0;
+        cout << "Euclidean" << endl;
     }
-    else if(!temp_str.compare("cosine")){
+    else if(!metric.compare("cosine")){
         m = 1;
+        cout << "Cosine" << endl;
     }
 
 	//read input and create table items
@@ -36,14 +41,74 @@ int main(int argc,char* argv[]){
 	read_conf(conf_file,k,L,n_clusters);
 
 	//read from prompt
-	//read_prompt(in,as,up);
+	read_prompt(in,as,up);
 
 	//INITIALISIATION
-	//random_selection(items,n_clusters,N,clusters);
-	kmeans(items,n_clusters,N,clusters,m);
+	if( in != -1){
+		if( in == 0 ){
+			random_selection(items,n_clusters,N,clusters);
+		}
+		else{
+			kmeansplus(items,n_clusters,N,clusters,m);
+		}
+	}
+	while(1){
+		//ASSIGNMENT
+		if( as != -1){
+			if( as == 0 ){
+				lloyds(items,n_clusters,N,clusters,m);
+			}
+			else if(as == 1){
+				lsh_search(k,d,L,N,m,items,n_clusters,clusters);
+			}
+			else{
+				cube_search(k,d,L,N,m,items,n_clusters,clusters);
+			}		
+		}
 
-	//ASSIGNMENT
-	lloyds(items,n_clusters,N,clusters,m);
+		old_clusters = clusters;
+
+		//UPDATE
+		if( up != -1 ){
+			if( up == 0 ){
+				kmeans(items,n_clusters,N,clusters,m,d);
+			}
+			else{
+				pam(items,n_clusters,N,clusters,m);
+			}
+		}
+
+		int b = 0;
+		for (i = 0; i < n_clusters ; i++){
+			if(old_clusters[i]->cent->id == clusters[i]->cent->id){
+				b++;
+			}
+		}	
+		if( b == n_clusters ){
+			break;
+		}	
+	}
+
+
+	if( in == -1){
+		run(k,d,L,N,m,items,n_clusters,clusters);
+	}
+
+	// //INITIALISIATION
+	// //random_selection(items,n_clusters,N,clusters);
+	// kmeansplus(items,n_clusters,N,clusters,m);
+
+	// //ASSIGNMENT
+	// lloyds(items,n_clusters,N,clusters,m);
+	// //lsh_search(k,d,L,N,m,items,n_clusters,clusters);
+	// //cube_search(k,d,L,N,m,items,n_clusters,clusters);
+
+	// //UPDATE
+	// //pam(items,n_clusters,N,clusters,m);
+	// //kmeans(items,n_clusters,N,clusters,m,d);
+
+	//EVALUATION
+	silhouette(items,n_clusters,N,clusters,m,d);
 
 
 	for ( i = 0 ; i < clusters.size() ; i++ ){

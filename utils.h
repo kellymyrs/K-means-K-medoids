@@ -22,6 +22,11 @@
 #include <limits>
 #include <iomanip>
 #include "Item.h"
+#include "Cluster.h"
+#include "Initialisation.h"
+#include "Assignment.h"
+#include "Update.h"
+#include "Evaluation.h"
 
 using namespace std;
 
@@ -29,5 +34,7 @@ void com_line_parser(int argc,char* argv[],ifstream& input_file,ifstream& conf_f
 void read_input(ifstream &input_file,vector<struct Item <double>*> &items,int &m,int &N,int &d);
 void read_conf(ifstream& conf_file, int& k, int & L, int& n_clusters );
 int read_prompt(int& in,int& as,int& up);
+void run(int &k,int &d,int &L,int &N,int &m,vector<struct Item <double>*> &items,int &n_clusters,vector<Cluster* > &clusters);
+
 
 #endif

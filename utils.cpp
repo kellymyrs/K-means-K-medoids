@@ -145,10 +145,10 @@ int read_prompt(int& in,int& as,int& up){
         cin >> com;
 
         if(!strcmp(com,"Kmeans")){
-            as = 0;
+            up = 0;
         }
         else if(!strcmp(com,"Pam")){
-            as = 1;
+            up = 1;
         }
         else{
             cout << "Undefined algorithm" << endl;
@@ -156,9 +156,51 @@ int read_prompt(int& in,int& as,int& up){
         }
 
     }
+    else{
+        in = as = up = -1;
+    }
     delete[] com;
     return 1;
 }
+
+void run(int &k,int &d,int &L,int &N,int &m,vector<struct Item <double>*> &items,int &n_clusters,vector<Cluster* > &clusters){
+        for(int i = 0 ; i < 2 ; i++){
+
+            for(int j = 0 ; j < 3 ; j++){
+            
+                for(int t = 0 ; t < 2 ; t++){
+
+                    //INITIALISIATION
+                    if(i == 0){
+                        random_selection(items,n_clusters,N,clusters);
+                    }
+                    else{
+                        kmeansplus(items,n_clusters,N,clusters,m);
+                    }
+
+                    //ASSIGNMENT
+                    if(j == 0){
+                        lloyds(items,n_clusters,N,clusters,m);
+                    }
+                    else if(j == 1){
+                        lsh_search(k,d,L,N,m,items,n_clusters,clusters);
+                    }
+                    else{
+                        cube_search(k,d,L,N,m,items,n_clusters,clusters);
+                    }
+
+                    //UPDATE
+                    if(t == 0){
+                        pam(items,n_clusters,N,clusters,m);
+                    }
+                    else{
+                        kmeans(items,n_clusters,N,clusters,m,d);
+                    }
+                }
+
+            }
+        }    
+} 
 
 // // Add id to the already existed DataSet
 // int add_id_to_data(ifstream &input_file,string name, string& new_input_fn) {

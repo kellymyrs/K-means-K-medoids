@@ -24,7 +24,7 @@ void random_selection(vector<struct Item <double>*> items,int& n_clusters,int& N
 
 }
 
-void kmeans(vector<struct Item <double>*> items,int& n_clusters,int& N,vector<Cluster* > &clusters,int &m){
+void kmeansplus(vector<struct Item <double>*> items,int& n_clusters,int& N,vector<Cluster* > &clusters,int &m){
 
 	int i,flag = 0;
 	double d,center;

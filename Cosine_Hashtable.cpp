@@ -5,7 +5,7 @@ Cosine_Hashtable::Cosine_Hashtable(int& k,int& d){
 	g_h = new Cosine_G(k,d);
 }
 
-Cosine_Hash_Member::Cosine_Hash_Member(Item<int>* it){
+Cosine_Hash_Member::Cosine_Hash_Member(Item<double>* it){
 	//cout << "Creating a hashmember !!!"<< endl;
 	item = it;
 	//g_f.clear();
@@ -32,7 +32,7 @@ Cosine_Hash_Member::~Cosine_Hash_Member(){
 }
 
 
-void Cosine_Hashtable::Insert_Hashtable(struct Item<int>* it,uint32_t& t_size){
+void Cosine_Hashtable::Insert_Hashtable(struct Item<double>* it,uint32_t& t_size){
 
 	uint32_t cg = g_h->Calculate_G(it->coordinates);
 
@@ -43,13 +43,13 @@ void Cosine_Hashtable::Insert_Hashtable(struct Item<int>* it,uint32_t& t_size){
 
 }
 
-struct Item<int>* Cosine_Hashtable::NN_Hashtable(vector<int>& c,uint32_t& t_size,double& dist){
+struct Item<double>* Cosine_Hashtable::NN_Hashtable(vector<double>& c,uint32_t& t_size,double& dist){
 	double temp_dist;
 
 	//cout << endl << endl << "Searching Hashtable" << endl;
 	uint32_t cg = g_h->Calculate_G(c) % t_size;
 
-	struct Item <int>* temp_item = NULL ,* min_item = NULL;
+	struct Item <double>* temp_item = NULL ,* min_item = NULL;
 
 	//search bucket
 	auto search = hashtable.find(cg);
@@ -89,15 +89,15 @@ struct Item<int>* Cosine_Hashtable::NN_Hashtable(vector<int>& c,uint32_t& t_size
 	}
 }
 
-struct Item<int>* Cosine_Hash_Member::Combine(vector<int>& c,double& temp_dist){
+struct Item<double>* Cosine_Hash_Member::Combine(vector<double>& c,double& temp_dist){
 
 	item->Cosine_Distance(c,temp_dist);
 	return item;
 
 }
 
-void Cosine_Hashtable::Range_Hashtable(vector<int>& c,uint32_t& t_size,double& R,vector<struct Item <int>*>& range){
-	struct Item <int>* temp_item = NULL;
+void Cosine_Hashtable::Range_Hashtable(vector<double>& c,uint32_t& t_size,double& R,vector<struct Item <double>*>& range){
+	struct Item <double>* temp_item = NULL;
 	double temp_dist;
 
 	//cout << endl << endl << "Searching Hashtable" << endl;

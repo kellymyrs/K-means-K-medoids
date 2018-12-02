@@ -19,7 +19,7 @@ Cosine_G::~Cosine_G(){
 	//g.clear();
 }
 
-uint32_t Cosine_G::Calculate_G(vector<int>& c){
+uint32_t Cosine_G::Calculate_G(vector<double>& c){
 	int h;
     uint32_t concat = 0;
 
@@ -39,7 +39,7 @@ uint32_t Cosine_G::Calculate_G(vector<int>& c){
     return concat;
 }
 
-uint32_t Cosine_G::Change_Bit(vector<int>& c,int p){
+uint32_t Cosine_G::Change_Bit(vector<double>& c,int p){
 	int h;
     uint32_t concat = 0;
 

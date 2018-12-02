@@ -24,8 +24,8 @@ class G{
 	public :
 		G(int& k,int& d);
 		~G();
-		int64_t f_function(vector <int>& p,uint32_t& t_size);
-		void Calculate_G(vector<int>& c,vector<int64_t>& g_numbers);
+		int64_t f_function(vector <double>& p,uint32_t& t_size);
+		void Calculate_G(vector<double>& c,vector<int64_t>& g_numbers);
 };
 
 #endif
