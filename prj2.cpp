@@ -13,7 +13,6 @@ int main(int argc,char* argv[]){
 	int i,j,k = 4 ,L = 5, N,d,n_clusters,in,as,up; // N = number of items(lines) in the file, d = number of coordinates (dimension)
 	char* com;
 	string line,temp_str;
-	int ident;
 	vector<struct Item <double>*> items,range;
 	struct Item <double>* item,* nn = NULL;
 	string metric;

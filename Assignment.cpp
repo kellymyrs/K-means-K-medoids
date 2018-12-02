@@ -54,11 +54,11 @@ void lsh_search(int &k,int &d,int &L,int &N,int &m,vector<struct Item <double>*>
     //Create Lsh_Hashtable
     if(m == 0){
         eu_h = new Lsh_Hashtable(k,d,L);
-        t_size = (uint32_t) floor(N/2);
+        t_size = (uint32_t) floor(N/8);
     }
     else{
         co_h = new Cosine_Lsh_Hashtable(k,d,L);
-        t_size = 2^(k-1);
+        t_size = 2<<(k-1);
     }
 
     for (int i = 0; i < N; ++i){
@@ -83,16 +83,18 @@ void lsh_search(int &k,int &d,int &L,int &N,int &m,vector<struct Item <double>*>
     else{
     	clusters[0]->get_centroid()->Cosine_Distance(clusters[1]->get_centroid()->coordinates,R);
     }
+    cout << "Initialise R : " << R << endl;
+    temp = R;
     for (int i = 0 ; i < n_clusters ; i++){
     	
     	for(int j = 0 ; j < n_clusters ; j++){
 		    
 		    if(i != j ){
 			    if( m == 0 ){
-			    	clusters[i]->get_centroid()->Distance(clusters[j]->get_centroid()->coordinates,R);
+			    	clusters[i]->get_centroid()->Distance(clusters[j]->get_centroid()->coordinates,temp);
 			    }
 			    else{
-			    	clusters[i]->get_centroid()->Cosine_Distance(clusters[j]->get_centroid()->coordinates,R);
+			    	clusters[i]->get_centroid()->Cosine_Distance(clusters[j]->get_centroid()->coordinates,temp);
 			    }	
 			}		    		
     	
@@ -101,10 +103,10 @@ void lsh_search(int &k,int &d,int &L,int &N,int &m,vector<struct Item <double>*>
 		    }
     	}
     }
-    cout << "Radious : " << R << endl;
-    R = 0.5;
-//   	R = R / 2.0;
-//   	cout << "Radious : " << R << endl;
+//    cout << "Radious : " << R << endl;
+//   R = 0.5;
+	R = R / 2.0;
+  	cout << "Radious : " << R << endl;
 
     while( assigned != N ){
 
@@ -172,7 +174,7 @@ void lsh_search(int &k,int &d,int &L,int &N,int &m,vector<struct Item <double>*>
 	   		break;
 	   	}
 
-	   	R = R*10000000;
+	   	R = R*2;
 
 	}
 
@@ -202,11 +204,11 @@ void cube_search(int &k,int &d,int &L,int &N,int &m,vector<struct Item <double>*
     
     if(m == 1){ //cosine
         cg = new Cosine_G(k,d);
-        t_size = (uint32_t) floor(N/2);
+        t_size = 2<<(k-1);
     }
     else{ //euclidean
         g = new G(k,d);
-        t_size = 2^(k-1);
+        t_size = (uint32_t) floor(N/2);
     }  
       
     //insert items into the hashtable
@@ -233,10 +235,10 @@ void cube_search(int &k,int &d,int &L,int &N,int &m,vector<struct Item <double>*
         }
     }
 
-    for (int i = 0 ; i < n_clusters ; i++){
-    	clusters[i]->get_centroid()->Print_Item();
-    	cout << clusters[i]->get_centroid()->cluster_id << endl;
-    }
+    // for (int i = 0 ; i < n_clusters ; i++){
+    // 	clusters[i]->get_centroid()->Print_Item();
+    // 	cout << clusters[i]->get_centroid()->cluster_id << endl;
+    // }
 
     //calculate the distances between the centroids
     if( m == 0 ){
@@ -245,16 +247,17 @@ void cube_search(int &k,int &d,int &L,int &N,int &m,vector<struct Item <double>*
     else{
     	clusters[0]->get_centroid()->Cosine_Distance(clusters[1]->get_centroid()->coordinates,R);
     }
+    temp = R;
     for (int i = 0 ; i < n_clusters ; i++){
     	
     	for(int j = 0 ; j < n_clusters ; j++){
 		    
 		    if(i != j ){
 			    if( m == 0 ){
-			    	clusters[i]->get_centroid()->Distance(clusters[j]->get_centroid()->coordinates,R);
+			    	clusters[i]->get_centroid()->Distance(clusters[j]->get_centroid()->coordinates,temp);
 			    }
 			    else{
-			    	clusters[i]->get_centroid()->Cosine_Distance(clusters[j]->get_centroid()->coordinates,R);
+			    	clusters[i]->get_centroid()->Cosine_Distance(clusters[j]->get_centroid()->coordinates,temp);
 			    }	
 			}		    		
     	
@@ -263,10 +266,10 @@ void cube_search(int &k,int &d,int &L,int &N,int &m,vector<struct Item <double>*
 		    }
     	}
     }
-    cout << "Radious : " << R << endl;
-    R = R/2;
-//   	R = R / 2.0;
-//   	cout << "Radious : " << R << endl;
+//    cout << "Radious : " << R << endl;
+//	R = R/2;
+   	R = R / 2.0;
+   	cout << "Radious : " << R << endl;
 
     while( assigned != N ){
 
@@ -329,7 +332,7 @@ void cube_search(int &k,int &d,int &L,int &N,int &m,vector<struct Item <double>*
 	   		break;
 	   	}
 
-	   	R = R*1000000;
+	   	R = R*2;
 
 	}
 
