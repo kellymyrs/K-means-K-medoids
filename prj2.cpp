@@ -18,6 +18,7 @@ int main(int argc,char* argv[]){
 	string metric;
 	vector<Cluster* > clusters;
 	vector<Cluster* > old_clusters;
+	int t;
 
 	srand (time(NULL));
 
@@ -42,26 +43,44 @@ int main(int argc,char* argv[]){
 	//read from prompt
 	read_prompt(in,as,up);
 
+	output_file << "Algorithm : " ;
+
 	//INITIALISIATION
 	if( in != -1){
 		if( in == 0 ){
 			random_selection(items,n_clusters,N,clusters);
+			if (t == 0){
+				output_file << "Random Selection x ";
+			}
 		}
 		else{
 			kmeansplus(items,n_clusters,N,clusters,m);
+			if(t == 0){
+				output_file << "K means++  x ";
+			}
 		}
 	}
+	t = 0;
 	while(1){
 		//ASSIGNMENT
 		if( as != -1){
 			if( as == 0 ){
 				lloyds(items,n_clusters,N,clusters,m);
+				if( t == 0 ){
+					output_file << "Lloyd's x ";
+				}
 			}
 			else if(as == 1){
 				lsh_search(k,d,L,N,m,items,n_clusters,clusters);
+				if(t == 0){
+					output_file << "Lsh Search x ";
+				}
 			}
 			else{
 				cube_search(k,d,L,N,m,items,n_clusters,clusters);
+				if(t == 0){
+					output_file << "Hypercube Search x ";
+				}
 			}		
 		}
 
@@ -71,9 +90,15 @@ int main(int argc,char* argv[]){
 		if( up != -1 ){
 			if( up == 0 ){
 				kmeans(items,n_clusters,N,clusters,m,d);
+				if(t == 0){
+					output_file << "K means";
+				}
 			}
 			else{
 				pam(items,n_clusters,N,clusters,m);
+				if(t == 0){
+					output_file << "PAM ";
+				}
 			}
 		}
 
@@ -86,25 +111,19 @@ int main(int argc,char* argv[]){
 		if( b == n_clusters ){
 			break;
 		}	
+		t++;
 	}
-
 
 	if( in == -1){
 		run(k,d,L,N,m,items,n_clusters,clusters);
 	}
 
-	// //INITIALISIATION
-	// //random_selection(items,n_clusters,N,clusters);
-	// kmeansplus(items,n_clusters,N,clusters,m);
+	output_file << endl;
+	output_file << "Metric" << metric << endl;
 
-	// //ASSIGNMENT
-	// lloyds(items,n_clusters,N,clusters,m);
-	// //lsh_search(k,d,L,N,m,items,n_clusters,clusters);
-	// //cube_search(k,d,L,N,m,items,n_clusters,clusters);
-
-	// //UPDATE
-	// //pam(items,n_clusters,N,clusters,m);
-	// //kmeans(items,n_clusters,N,clusters,m,d);
+	for (i = 0; i < n_clusters; ++i){
+		output_file << "Cluster-" << i << " { size : " << clusters[i]->cl.size() << " , centroid : " << clusters[i]->cent->id << " }"<<endl;		
+	}
 
 	//EVALUATION
 	silhouette(items,n_clusters,N,clusters,m,d);
